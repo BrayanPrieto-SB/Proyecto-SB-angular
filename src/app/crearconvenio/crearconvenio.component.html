@@ -1,0 +1,53 @@
+<div class="container"
+  fxLayout="column"
+  fxLayoutGap="10px"
+  fxFlexAlign="center">
+
+  <div fxFlex
+  fxFlexAlign="center">
+    <div>
+        <h3>Crear Convenio</h3>
+        <hr>
+    </div>
+  </div>
+
+  <div fxFlex>
+   
+  </div>
+  <div fxFlex fxFlexOffset="20px" class="form-size"  fxFlexAlign="center" >
+    
+    <form  (ngSubmit) = "onSubmit()" >
+
+      <p>
+        <mat-form-field >
+          <input  matInput class ="form-control" placeholder="Nit" type="tel" pattern="[0-9]*" [(ngModel)] = "convenio.empTelLocal_nit" name="nit" required>
+         </mat-form-field>
+
+      </p>
+      <p>        
+         <mat-form-field  >
+          <input matInput class ="form-control" placeholder="Nombre" type="text" [(ngModel)]="convenio.nombre" name="nombre"  required >
+          <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+
+        </mat-form-field>
+      </p>   
+      <p>
+        <mat-form-field >
+            <input matInput class ="form-control" placeholder="Correo" type="email" [(ngModel)] = "convenio.correo" name="correo" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field >
+            <input matInput class ="form-control" placeholder="Valor minuto" type="tel" pattern="[0-9]*" [(ngModel)] = "convenio.valor_minuto" name="valor_minuto " required>
+        </mat-form-field>
+      
+      </p>
+      <button type="submit" mat-button class="background-primary text-floral-white" >Crear Convenio</button>
+    </form>
+
+
+      
+  </div>
+
+</div>

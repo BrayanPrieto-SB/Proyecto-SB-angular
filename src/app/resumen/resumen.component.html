@@ -1,0 +1,42 @@
+
+<div class="container"
+fxLayout="column"
+fxLayoutGap="10px"
+fxFlexAlign="center">
+
+<div fxFlex
+fxFlexAlign="center">
+  <div>
+      <h3>Resumen de consumos</h3>
+      <hr>
+  </div>
+</div>
+
+
+<div    >
+  <table   mat-table  [dataSource]="dataSource" class="mat-elevation-z8">
+      
+          <ng-container matColumnDef="nombre">
+              <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+              <mat-cell  *matCellDef="let element"> {{element.nombre}} </mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="minutos">
+              <mat-header-cell *matHeaderCellDef> Minutos Consumidos </mat-header-cell>
+              <mat-cell  *matCellDef="let element"> {{element.minutos}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="valor">
+              <mat-header-cell *matHeaderCellDef> Valor Total $COP </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.valor}} </mat-cell>
+          </ng-container>
+          
+   
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>      
+      
+  </table>
+  
+ 
+</div>
+
+</div>

@@ -1,0 +1,59 @@
+
+<div class="container"
+  fxLayout="column"
+  fxLayoutGap="10px"
+  fxFlexAlign="center">
+
+  <div fxFlex
+  fxFlexAlign="center">
+    <div>
+        <h3>Convenios</h3>
+        <hr>
+    </div>
+  </div>
+
+
+  <div >
+    <table   mat-table  [dataSource]="dataSource" class="mat-elevation-z8">
+        
+            <ng-container matColumnDef="empTelLocal_nit">
+                <mat-header-cell *matHeaderCellDef> Nit </mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+               <a mat-button (click)="openConvenioInfo()"  > {{element.empTelLocal_nit}}</a>
+                </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                <mat-cell  *matCellDef="let element"> {{element.nombre}} </mat-cell>
+            </ng-container>
+           
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>      
+        
+
+    </table>
+
+
+   
+  </div>
+
+</div>
+<!-- 
+<div>
+    <table class="table table-striped">
+       <thead>
+            <tr>
+                <th>Nit</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let convenio of convenios">
+                <td>{{convenio.empTelLocal_nit}}</td>
+                <td>{{convenio.nombre}}</td>
+            </tr>
+            
+        </tbody> 
+    </table>
+    </div> -->
