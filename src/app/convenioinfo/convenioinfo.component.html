@@ -1,33 +1,77 @@
-<mat-toolbar color = "primary">
-    <h1></h1>
+<div  fxFlex fxFlexAlign="center" *ngFor="let i of convenio">
+
+  <mat-toolbar color = "primary">
+    <h1 fxFlex fxFlexAlign="center" mat-dialog-title> {{i.nombre}} </h1>
+      
+      <span class = "flex-spacer"></span>
+      <button mat-button mat-dialog-close>&times;</button>
+  </mat-toolbar>
+
+
+
+
+  <!-- <div class="container" fxLayout="column" fxLayoutGap="10px" fxFlexAlign="center"> -->
+
+
+
+
+
+
     
-    <span class = "flex-spacer"></span>
-    <button mat-button mat-dialog-close>&times;</button>
-</mat-toolbar>
+  <mat-list class="inline-list" > 
+    <mat-list-item > <b>Convenio No : &nbsp;</b>{{i.convenio_no}} </mat-list-item>
+    <mat-list-item> <b>NIT : &nbsp;</b> {{i.empTelLocal_nit}} </mat-list-item>
+    <mat-list-item> <b>Correo :&nbsp; </b> {{i.correo}} </mat-list-item>
+    <mat-list-item> <b>Valor Minuto :&nbsp; </b> {{i.valor_minuto}} </mat-list-item>
+   </mat-list>
+  
+   <div class="example-container">
+    <form  (ngSubmit) = "onSubmit()">
+
+   <mat-selection-list  >
+    
+    <mat-selection-list #list>
+        <mat-list-option id="opcion" *ngFor="let tta of campos" [selected]="tta.selected" (click)="onAreaListControlChanged(list)" [value]="tta.name">
+                {{tta.name}}
+                <mat-divider></mat-divider>
+        </mat-list-option>
+    </mat-selection-list>
+    
+  
+    <mat-form-field  appearance="fill">
+      <mat-label>Mes y Año</mat-label>
+      <input matInput [matDatepicker]="dp" [formControl]="date">
+      <mat-datepicker-toggle matSuffix [for]="dp">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker 
+                      #dp
+                      startView="multi-year"
+                      (yearSelected)="chosenYearHandler($event)"
+                      (monthSelected)="chosenMonthHandler($event, dp)"
+                      panelClass="example-month-picker">
+      </mat-datepicker>
+    </mat-form-field>
+
+    
 
 
+    <button type="submit" mat-stroked-button class="example-button-row" color="primary" >Generar Reporte</button>
+  </mat-selection-list>
 
-
-<div class="container"
-fxLayout="column"
-fxLayoutGap="10px"
-fxFlexAlign="center">
-
-<div fxFlex
-fxFlexAlign="center">
-  <div>
-      <h3>Nombre del convenio</h3>
-      <p>
-        Today's item: {{nit}}
-      </p>
-
-      <hr>
+  </form>
   </div>
+  <!-- <p>
+    Options selected: {{shoes.selectedOptions.selected.length}}
+  </p>
+   -->
+  
 </div>
 
 
-<div     >
-  <table   mat-table  class="mat-elevation-z8">
+<!-- <div   fxFlex
+fxFlexAlign="center"  >
+  <table   mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       
 
           <ng-container matColumnDef="nombre">
@@ -49,10 +93,15 @@ fxFlexAlign="center">
             <mat-header-cell *matHeaderCellDef> Valor minuto </mat-header-cell>
             <mat-cell  *matCellDef="let element"> {{element.valor_minuto}} </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="convenio_no">
+          <mat-header-cell *matHeaderCellDef> Numero de convenio </mat-header-cell>
+          <mat-cell  *matCellDef="let element"> {{element.convenio_no}} </mat-cell>
+      </ng-container>
          
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>      
       
   </table>
   
-</div>
+</div> -->

@@ -3,4 +3,5 @@ export class Convenio {
     nombre: string;
     correo: string;
     valor_minuto: number;
+    convenio_no: number;
 } 

@@ -3,7 +3,7 @@
   fxLayoutGap="10px"
   fxFlexAlign="center">
 
-  <div fxFlex
+  <div id="convenio" fxFlex
   fxFlexAlign="center">
     <div>
         <h3>Crear Convenio</h3>
@@ -16,34 +16,34 @@
   </div>
   <div fxFlex fxFlexOffset="20px" class="form-size"  fxFlexAlign="center" >
     
-    <form  (ngSubmit) = "onSubmit()" >
+    <form  class="example-form" novalidate (ngSubmit) = "onSubmit()" >
 
       <p>
-        <mat-form-field >
-          <input  matInput class ="form-control" placeholder="Nit" type="tel" pattern="[0-9]*" [(ngModel)] = "convenio.empTelLocal_nit" name="nit" required>
+        <mat-form-field class="example-full-width" >
+          <input  matInput class ="form-control" placeholder="Nit" type="tel" pattern="[0-9]*" [(ngModel)] = "convenio.empTelLocal_nit" name="nit" required minlength="10" required>
          </mat-form-field>
 
       </p>
       <p>        
-         <mat-form-field  >
-          <input matInput class ="form-control" placeholder="Nombre" type="text" [(ngModel)]="convenio.nombre" name="nombre"  required >
-          <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+         <mat-form-field  class="example-full-width">
 
+          <input matInput class ="form-control" placeholder="Nombre" type="text" [(ngModel)]="convenio.nombre" name="nombre" required minlength="4" required maxlength="10"  required >
+          <mat-error *ngIf="nombre.invalid">{{getErrorMessage()}}</mat-error>          
         </mat-form-field>
       </p>   
       <p>
-        <mat-form-field >
+        <mat-form-field  class="example-full-width" >
             <input matInput class ="form-control" placeholder="Correo" type="email" [(ngModel)] = "convenio.correo" name="correo" required>
-        </mat-form-field>
+            <mat-error *ngIf="correo.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
       </p>
 
       <p>
-        <mat-form-field >
-            <input matInput class ="form-control" placeholder="Valor minuto" type="tel" pattern="[0-9]*" [(ngModel)] = "convenio.valor_minuto" name="valor_minuto " required>
+        <mat-form-field class="example-full-width">
+            <input matInput class ="form-control" placeholder="Valor minuto" type="tel" pattern="[0-9]*" [(ngModel)] = "convenio.valor_minuto" name="valor_minuto " required minlength="3" required>
         </mat-form-field>
-      
       </p>
-      <button type="submit" mat-button class="background-primary text-floral-white" >Crear Convenio</button>
+      <button id="boton" type="submit" mat-button class="background-primary text-floral-white" >Crear Convenio</button>
     </form>
 
 

@@ -15,6 +15,11 @@ export class ConvenioService {
     return this.httpClient.get<Convenio[]>(baseURL + 'conv/')
   }
 
+  listarConvenio(nit): Observable<Convenio[]>{
+    return this.httpClient.get<Convenio[]>(baseURL + 'home/'+ nit )
+  }
+
+
 
   crearConvenio(convenio: Convenio ): Observable<Object>{
     const httpOptions = {

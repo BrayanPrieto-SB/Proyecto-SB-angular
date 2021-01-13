@@ -13,8 +13,28 @@ fxFlexAlign="center">
 </div>
 
 
-<div    >
-  <table   mat-table  [dataSource]="dataSource" class="mat-elevation-z8">
+
+<div>
+    <form (ngSubmit) = "onSubmit()">   
+        <mat-form-field appearance="fill">
+            <mat-label>Mes y Año</mat-label>
+            <input matInput [matDatepicker]="dp" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker 
+                            #dp
+                            startView="multi-year"
+                            (yearSelected)="chosenYearHandler($event)"
+                            (monthSelected)="chosenMonthHandler($event, dp)"
+                            panelClass="example-month-picker">
+            </mat-datepicker>
+        </mat-form-field>
+        <button id="boton" type="submit" mat-button class="background-primary text-floral-white" >Aplicar</button>
+
+    </form>
+  </div>
+
+<div class="mat-elevation-z8">
+  <mat-table   mat-table  [dataSource]="dataSource" >
       
           <ng-container matColumnDef="nombre">
               <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
@@ -23,18 +43,20 @@ fxFlexAlign="center">
           
           <ng-container matColumnDef="minutos">
               <mat-header-cell *matHeaderCellDef> Minutos Consumidos </mat-header-cell>
-              <mat-cell  *matCellDef="let element"> {{element.minutos}} </mat-cell>
+              <mat-cell  *matCellDef="let element"> {{element.minutos | number}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="valor">
-              <mat-header-cell *matHeaderCellDef> Valor Total $COP </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.valor}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef> Valor Total  </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.valor | currency:'COP'}} </mat-cell>
           </ng-container>
           
    
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>      
       
-  </table>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="2" showFirstLastButtons></mat-paginator>
+
   
  
 </div>

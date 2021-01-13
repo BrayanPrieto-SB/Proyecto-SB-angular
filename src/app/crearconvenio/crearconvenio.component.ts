@@ -18,6 +18,22 @@ import { baseURL } from '../shared/baseurl';
 export class CrearconvenioComponent implements OnInit {
   convenio: Convenio = new Convenio();
   constructor(private convenioService: ConvenioService, private router: Router) { }
+  correo = new FormControl('', [Validators.required, Validators.email]);
+
+  nombre = new FormControl('', [Validators.required]);
+
+  getErrorMessage() {
+    if (this.correo.hasError('required')) {
+      return 'Debe ingresar un valor';
+    }
+    return this.correo.hasError('correo') ? 'Correo no valido' : '';
+    
+    if (this.nombre.hasError('required')) {
+      return 'Debe ingresar un valor';
+    }
+    return this.nombre.hasError('nombre') ? 'Nombre no Valido' : '';
+
+  }
 
   ngOnInit(): void {
   }
@@ -36,8 +52,6 @@ export class CrearconvenioComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.convenio);
-    
-
     this.guardarConvenio();
 }
 
@@ -51,7 +65,7 @@ export class CrearconvenioComponent implements OnInit {
   validationMessages = {
     'nombre': {
       'required':      'El nombre es requerido.',
-      'minlength':     'El nombre debe poseer minimo 5 caracteres.',
+      'minlength':     'El nombre debe poseer minimo 3 caracteres.',
       'maxlength':     'El nombre no puede ser mas largo de 50 caracteres.'
     }
 

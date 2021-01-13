@@ -1,10 +1,14 @@
-import { Component, OnInit , Input, Output} from '@angular/core';
+import { Component, OnInit , Input, Output, ViewChild} from '@angular/core';
 import { ConvenioService } from '../services/convenio.service';
 import { Convenio } from '../shared/convenio';
-import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogRef,MatDialogConfig } from '@angular/material/dialog';
 import { ConvenioinfoComponent } from '../convenioinfo/convenioinfo.component';
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { filter } from 'rxjs/operators';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -13,31 +17,55 @@ import { ConvenioinfoComponent } from '../convenioinfo/convenioinfo.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  convenios: Convenio[]; 
+  searchKey: string;
+  dialogValue: string;
+  sendValue: any;
+  listData: MatTableDataSource<any>;
 
-  convenios: Convenio[];
-  @Output() elemento :number; 
+  displayedColumns: string[] = ['empTelLocal_nit','nombre','actions'];
+  dataSource = new MatTableDataSource<Convenio>();
 
-  constructor(private convenioService: ConvenioService, private router: Router, public dialog: MatDialog) { }
+
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+
+  constructor(private convenioService: ConvenioService, 
+    private router: Router,
+    private route: ActivatedRoute, 
+    public dialog: MatDialog) {
+
+   }
 
   ngOnInit(): void {
-    
- 
-
-  }
-  private listarConvenios(){
     this.convenioService.listarConvenios().subscribe(data => {
       this.convenios = data;
+      this.dataSource = new MatTableDataSource(this.convenios);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      
     })
   }
-  openConvenioInfo(){
-    this.dialog.open(ConvenioinfoComponent, {width: '500px', height:'450px'})
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase(); 
+    this.dataSource.filter = filterValue;
   }
-  irRuta(){
-    this.router.navigate(['/home']);
+
+
+  openConvenioInfo(nit){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "70%";
+    dialogConfig.height = "40%";
+    const dialogRef = this.dialog.open(ConvenioinfoComponent, {width: '50%', height:'65%', data : { nit }} );
   }
+
+
   
-  displayedColumns: string[] = ['empTelLocal_nit','nombre'];
-  dataSource = this.convenioService.listarConvenios();
-  
+
   
 }

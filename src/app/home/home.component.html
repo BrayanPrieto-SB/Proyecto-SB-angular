@@ -1,59 +1,59 @@
-
 <div class="container"
   fxLayout="column"
   fxLayoutGap="10px"
-  fxFlexAlign="center">
-
+  fxFlexAlign="center"
+  >
   <div fxFlex
   fxFlexAlign="center">
     <div>
-        <h3>Convenios</h3>
+        <h3>Convenios </h3>
+       
         <hr>
     </div>
+    
+
   </div>
 
+  <mat-form-field class="search-form-field" floatLabel="never">
+   
+    <input matInput (keyup)="applyFilter($event.target.value)" autocomplete="off" placeholder="Buscar" #input>
+  </mat-form-field>
 
-  <div >
-    <table   mat-table  [dataSource]="dataSource" class="mat-elevation-z8">
-        
-            <ng-container matColumnDef="empTelLocal_nit">
-                <mat-header-cell *matHeaderCellDef> Nit </mat-header-cell>
-                <mat-cell *matCellDef="let element"> 
-               <a mat-button (click)="openConvenioInfo()"  > {{element.empTelLocal_nit}}</a>
-                </mat-cell>
+
+  <div class="mat-elevation-z8">
+    <mat-table    mat-table  [dataSource]="dataSource">
+            <ng-container matColumnDef="empTelLocal_nit" >
+                <mat-header-cell *matHeaderCellDef > Nit </mat-header-cell>
+                <mat-cell  *matCellDef="let element"   > {{element.empTelLocal_nit  }} </mat-cell>
+                
+                <!-- <app-convenioinfo [nit]="element.empTelLocal_nit" ></app-convenioinfo> -->
+                <!-- <a mat-button (click)=openConvenioInfo()> </a> -->
             </ng-container>
             
-            <ng-container matColumnDef="nombre">
+            <ng-container matColumnDef="nombre" >
                 <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-                <mat-cell  *matCellDef="let element"> {{element.nombre}} </mat-cell>
+                <mat-cell  *matCellDef="let element" > {{element.nombre}} </mat-cell>
             </ng-container>
-           
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+
+                <button mat-icon-button  class="material-icons" (click)="openConvenioInfo(element.empTelLocal_nit)"><mat-icon>launch</mat-icon></button> 
+    
+                  <!-- <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button> -->
+                </mat-cell>
+              </ng-container>
+         
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>      
-        
 
-    </table>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+
 
 
    
   </div>
 
 </div>
-<!-- 
-<div>
-    <table class="table table-striped">
-       <thead>
-            <tr>
-                <th>Nit</th>
-                <th>Nombre</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor = "let convenio of convenios">
-                <td>{{convenio.empTelLocal_nit}}</td>
-                <td>{{convenio.nombre}}</td>
-            </tr>
-            
-        </tbody> 
-    </table>
-    </div> -->

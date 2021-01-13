@@ -12,10 +12,15 @@ import { Resumen } from '../shared/resumen';
 export class ResumenService {
 
   constructor(private httpClient: HttpClient) { }
-  
-  mostrarResumen(): Observable<Resumen[]>{
+
+  mostrarResumenTotal(): Observable<Resumen[]>{
 
     return this.httpClient.get<Resumen[]>(baseURL + 'resumen/')
+  }
+  
+  mostrarResumen(anio, mes): Observable<Resumen[]>{
+
+    return this.httpClient.get<Resumen[]>(baseURL + 'resumen/'+anio+'/'+mes+'/')
   }
 
 
