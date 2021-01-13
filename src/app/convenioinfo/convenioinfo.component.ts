@@ -96,7 +96,6 @@ export class ConvenioinfoComponent implements OnInit {
     const ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());
     this.date.setValue(ctrlValue);
-    //console.log(this.date.value.year());
     
     
   }
@@ -105,7 +104,6 @@ export class ConvenioinfoComponent implements OnInit {
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonth.month());
     this.date.setValue(ctrlValue);
-    //console.log(this.date.value.month()+1);
     datepicker.close();
 
   }
@@ -138,7 +136,6 @@ export class ConvenioinfoComponent implements OnInit {
     this.selectedOptions = list.selectedOptions.selected.map(
       item => item.value
     );
-    //console.log(this.selectedOptions);
 
   }
 private descargarReporteComponent(nit,anio,mes,dur,dest,min_val){
@@ -146,10 +143,7 @@ private descargarReporteComponent(nit,anio,mes,dur,dest,min_val){
 
       const newBlob = new Blob([(response)], { type: 'application/text' });
       saveAs(newBlob, 'Archivo_'+ nit +"_"+ anio+"_"+mes);
-      
-
-      // const downloadURL = URL.createObjectURL(newBlob);
-      // window.open(downloadURL);
+ 
       
     });
     }

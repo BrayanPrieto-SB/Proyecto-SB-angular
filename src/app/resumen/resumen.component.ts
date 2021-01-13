@@ -51,8 +51,6 @@ export class ResumenComponent implements OnInit {
   date = new FormControl(moment());
   displayedColumns: string[] = ['nombre','minutos','valor'];
   resumenes: Resumen[];
-//dataSource1: DataSource<Resumen>;
- // dataSource1 = new MatTableDataSource();
   dataSource = new MatTableDataSource<Resumen>();
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -84,18 +82,11 @@ export class ResumenComponent implements OnInit {
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonth.month());
     this.date.setValue(ctrlValue);
-    //console.log(this.date.value.month()+1);
     datepicker.close();
 
   }
 
-  // private mostrarResumen(anio,mes){
-  //   this.resumenService.mostrarResumen(this.date.value.year(),this.date.value.month()+1).subscribe(data => {
-  //     this.resumenes = data;
-  //   })
-  // }
-  //dataSource = this.mostrarResumen(this.date.value.year(),this.date.value.month()+1);
-
+ 
   formatLabel(value: number) {
     if (value >= 1000) {
       return Math.round(value / 1000) + 'k';
